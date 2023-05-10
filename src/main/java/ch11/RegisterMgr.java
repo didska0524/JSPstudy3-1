@@ -27,7 +27,7 @@ public class RegisterMgr {
         try {
             conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
             stmt = conn.createStatement();
-            String strQuery = "select * from tblregister";
+            String strQuery = "select * from tblRegister";
             rs = stmt.executeQuery(strQuery);
 
             while(rs.next()) {
