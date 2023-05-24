@@ -23,7 +23,7 @@ public class RegisterMgrPool {
 
         try {
             conn = pool.getConnection();
-            String strQuery = "select * from tblRegister";
+            String strQuery = "select * from tblregister";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(strQuery);
 
