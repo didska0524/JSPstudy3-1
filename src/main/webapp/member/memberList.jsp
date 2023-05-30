@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import ="java.util.*, mem.*"%>
 <jsp:useBean id="mMgr" class="mem.MemberMgr"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,15 +33,19 @@
     <%
       Vector<MemberBean> vlist = mMgr.getMemberList();
       int counter = vlist.size();
-      for(int i=0; i<counter; i++){
-        MemberBean bean = vlist.get(i);
+      for (MemberBean bean : vlist) {
     %>
     <tr>
-      <td><%=bean.getId()%></td>
-      <td><%=bean.getPwd()%></td>
-      <td><%=bean.getName()%></td>
-      <td><%=bean.getBirthday()%></td>
-      <td><%=bean.getEmail()%></td>
+      <td><%=bean.getId()%>
+      </td>
+      <td><%=bean.getPwd()%>
+      </td>
+      <td><%=bean.getName()%>
+      </td>
+      <td><%=bean.getBirthday()%>
+      </td>
+      <td><%=bean.getEmail()%>
+      </td>
       <td><a href="memberModify.jsp?id=<%=bean.getId()%>">수정</a></td>
       <td><a href="memberDelete.jsp?id=<%=bean.getId()%>"
              onclick="return confirm('<%=bean.getName()%>님 회원정보를 정말 삭제하시겠습니까?');">삭제</a></td>
@@ -49,6 +54,11 @@
   </table>
   <br/><br/>
   total records : <%=counter%>
+
+  <form action="memberSearch.jsp" method="get">
+    <input type="text" name="name" placeholder="회원 이름 검색">
+    <input type="submit" value="검색">
+  </form>
 </div>
 </body>
 </html>

@@ -129,16 +129,16 @@ public class MemberMgr {
     }
 
     public boolean loginMember(String id, String pwd) {
-        Connection con = null;
+        Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         boolean success = false;
 
         try {
-            con = pool.getConnection();
+            conn = pool.getConnection();
             String query = "select count(*) from member where id = ? and pwd = ?";
-            pstmt = con.prepareStatement(query);
+            pstmt = conn.prepareStatement(query);
             pstmt.setString(1, id);
             pstmt.setString(2, pwd);
             rs = pstmt.executeQuery();
@@ -148,8 +148,61 @@ public class MemberMgr {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            pool.freeConnection(con,pstmt,rs);
+            pool.freeConnection(conn,pstmt,rs);
         }
         return success;
+    }
+
+    public boolean deleteMember(MemberBean bean) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        boolean success = false;
+
+        try{
+            conn = pool.getConnection();
+            String query = "delete from member where id=?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, bean.getId());
+
+            int result = pstmt.executeUpdate();
+
+            if (result > 0) {
+                success = true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            pool.freeConnection(conn, pstmt);
+        }
+        return success;
+    }
+
+    public Vector<MemberBean> searchMemberList(String name){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Vector<MemberBean> vlist = new Vector<MemberBean>();
+        try{
+            conn = pool.getConnection();
+            String sql = "SELECT * FROM member WHERE name LIKE ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "%" + name + "%");
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                MemberBean bean = new MemberBean();
+                bean.setId(rs.getString("id"));
+                bean.setPwd(rs.getString("pwd"));
+                bean.setName(rs.getString("name"));
+                bean.setBirthday(rs.getString("birthday"));
+                bean.setEmail(rs.getString("email"));
+                vlist.addElement(bean);
+            }
+        }catch (Exception ex){
+            System.out.println("Exception" + ex);
+        }finally {
+            pool.freeConnection(conn, pstmt, rs);
+        }
+        return vlist;
     }
 }
