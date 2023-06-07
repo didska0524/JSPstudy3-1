@@ -1,0 +1,170 @@
+2023-03-13 java심화 과제 제출 201804077최환규
+1. Converter 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Converter extends JFrame {
+    JLabel jlaF, jlaC, jre;
+    JTextField jTeF, jTeC;
+    JButton jbt, jbt2;
+    public Converter() {
+        setTitle("온도변환기"); // 프레임의 타이틀 달기
+        setSize(280, 150); // 프레임 크기 280x150 설정
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Container contentPane = getContentPane(); // 컨텐트팬 알아내기
+        //contentPane.setBackground(Color.ORANGE); // 오렌지색 배경 설정
+        contentPane.setLayout(new FlowLayout()); // 컨텐트팬에 FlowLayout
+        // 	배치관리자 달기
+
+
+        jlaF=new JLabel("화씨온도(F)");
+        jlaC=new JLabel("섭씨온도(C)");
+        jre = new JLabel("출력값");
+        jTeF=new JTextField(14);
+        jTeC=new JTextField(14);
+        jbt= new JButton("화씨를 섭씨로 변환");
+        jbt2=new JButton("섭씨를 화씨로 변환");
+        jbt.addActionListener(new MyListener());
+        jbt2.addActionListener(new MyListener());
+
+        contentPane.add(jlaF);
+        contentPane.add(jTeF);
+
+        contentPane.add(jlaC);
+        contentPane.add(jTeC);
+
+        contentPane.add(jbt);
+        contentPane.add(jbt2);
+
+        contentPane.add(jre);
+
+        //contentPane.add(new JButton("OK")); // OK 버튼 달기
+        //contentPane.add(new JButton("Cancel")); // Cancel 버튼 달기
+        //contentPane.add(new JButton("Ignore")); // Ignore 버튼 달기
+
+        this.pack(); // pack()는 기본 사이즈 지정   this.pack()은 내가 설정한 사이즈를 받음
+        setVisible(true); // 화면에 프레임 출력
+    }
+
+    class MyListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==jbt2) {
+                double c=Double.parseDouble(jTeC.getText());
+                double f=(c*1.8)+32;
+                jre.setText(String.format("%7.2f", f));
+            }
+            else if(e.getSource()==jbt) {
+                double f =Double.parseDouble(jTeF.getText());
+                double c=(f-32)/1.8;
+                jre.setText(String.format("%7.2f",  c));
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        new Converter();
+    }
+}
+
+
+2. LoginGrid 
+
+import javax.swing.*;
+import java.awt.*;
+
+public class LoginGrid extends JFrame {
+    JLabel id,pass;
+    JTextField idt, pst;
+    JButton bt,bt2;
+    LoginGrid() {
+        setTitle("로그인화면"); // 프레임의 타이틀 달기
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Container contentPane = getContentPane(); // 컨텐트팬 알아내기
+        //contentPane.setBackground(Color.ORANGE); // 오렌지색 배경 설정
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new GridLayout(2,2)); // 컨텐트팬에 FlowLayout
+        // 	배치관리자 달기
+        //Container contentPane2 = getContentPane();
+        JPanel contentPane2 = new JPanel();
+        contentPane2.setLayout(new FlowLayout());
+
+        id=new JLabel("ID");
+        pass=new JLabel("PASSWORD");
+        idt=new JTextField(14);
+        pst=new JPasswordField(14);
+
+        bt= new JButton("확인");
+        bt2=new JButton("취소");
+
+        contentPane.add(id);
+        contentPane.add(idt);
+
+        contentPane.add(pass);
+        contentPane.add(pst);
+
+        contentPane2.add(bt);//,BorderLayout.EAST);
+        contentPane2.add(bt2);//,BorderLayout.WEST);
+        //contentPane.add(jre);
+
+        setSize(250,150); // 프레임 크기 300x150 설정
+        add(contentPane,BorderLayout.CENTER);
+        add(contentPane2,BorderLayout.SOUTH);
+        setVisible(true); // 화면에 프레임 출력
+    }
+
+    public static void main(String[] args) {
+        new LoginGrid();
+    }
+}
+
+3. SwingEx8
+import javax.swing.*;
+import java.awt.*;
+import java.util.concurrent.ForkJoinPool;
+
+public class SwingEx8 extends JFrame {
+
+    JLabel hj;
+    JButton bot,bot2,bot3;
+
+    SwingEx8() {
+        setTitle("OpenChallenge"); // 프레임의 타이틀 달기
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Container contentPane = getContentPane(); // 컨텐트팬 알아내기
+        //contentPane.setBackground(Color.ORANGE); // 오렌지색 배경 설정
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new FlowLayout()); // 컨텐트팬에 FlowLayout
+        JPanel contentPane2 = new JPanel();
+        contentPane2.setBackground(Color.gray);
+        contentPane2.setLayout(new BorderLayout());
+
+        bot= new JButton("Open");
+        bot2=new JButton("Read");
+        bot3=new JButton("Close");
+        contentPane.add(bot);//,BorderLayout.NORTH);
+        contentPane.add(bot2);//,BorderLayout.NORTH);
+        contentPane.add(bot3);//,BorderLayout.NORTH);
+
+        hj = new JLabel("Hello Java!");
+        //hj.setSize(100,20);
+        hj.setBounds(100,50,100,20);
+        add(hj);
+
+
+        setSize(300, 300);
+        add(contentPane,BorderLayout.NORTH);
+        add(contentPane2,BorderLayout.CENTER);
+        setVisible(true); // 화면에 프레임 출력
+
+    }
+
+    public static void main(String[] args) {
+        new SwingEx8();
+    }
+}
