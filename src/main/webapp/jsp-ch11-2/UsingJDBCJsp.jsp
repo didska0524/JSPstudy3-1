@@ -40,7 +40,7 @@
 <head>
     <title>JSP에서 데이터베이스 연동</title>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <!-- 디자인 관련 (style.css)파일을 링크시킨다. -->
+    <!-- 디자인 관련 (style2.css)파일을 링크시킨다. -->
 </head>
 <body bgcolor="#FFFFCC">
 <h2>JSP 스크립트릿에서 데이터베이스 연동 예제</h2>

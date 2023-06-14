@@ -82,6 +82,7 @@
 </script>
 </head>
 <body >
+<jsp:include page="../top.jsp" />
 <div align="center">
 	<br/>
 	<h2>JSPBoard</h2>

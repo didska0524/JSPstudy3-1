@@ -19,6 +19,7 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<jsp:include page="../top.jsp" />
 <br/><br/><br/>
 <form method="post"  action="sessionLoginProc.jsp">
 <table class="login">

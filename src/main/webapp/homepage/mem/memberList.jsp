@@ -8,6 +8,7 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<jsp:include page="../top.jsp" />
 <div align="center">
 <br/>
 <h3>회원정보</h3>

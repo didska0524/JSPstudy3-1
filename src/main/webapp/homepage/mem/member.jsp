@@ -9,6 +9,7 @@
 <script src="script.js"></script>
 </head>
 <body>
+<jsp:include page="../top.jsp" />
 <br/><br/>
 <form name="regForm" method="post" action="memberProc.jsp">
 <table class="member">
